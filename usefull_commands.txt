@@ -1,0 +1,4 @@
+python -m venv name_new_venv
+-para acitvarlo usar el activate.bat que está en Scripts
+
+pip install -r requirements.txt
