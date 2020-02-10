@@ -1,5 +1,6 @@
 .ipynb_checkpoints
 secrets.py
 venv
+__pycache__
 *~
 ~*
