@@ -59,18 +59,25 @@ class Bot():
         popup_3 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
         popup_3.click()
 
-    def swipe_reject(self):
-        num_swipes=30
+    def save_screenshot(self, name):
+        path = "./screenshots/"
+        print("saving image:", name)
+        self.driver.save_screenshot(path+name)
+
+    def swipe_reject(self, num_swipes, start_index=1):
         for i in range(num_swipes):
             print(i)
-            time.sleep(0.5)
+            time.sleep(0.3)
+            # save the screenshot
+            name = "screenshot_{}.png".format(i+start_index)
+            self.save_screenshot(name)
             try:
                 self.dislike()
             except:
-
                 self.close_popup()
 
 bot = Bot()
 bot.login()
 
 '//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/div[1]/div/div/div/div/div'
+
