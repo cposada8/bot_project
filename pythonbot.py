@@ -1,5 +1,6 @@
 from selenium import webdriver
 from secrets import username, password
+from selenium.webdriver.common.keys import Keys
 
 import time
 import urllib
@@ -48,12 +49,18 @@ class Bot():
         popup_2.click()
 
     def like(self):
-        like_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[3]')
+        like_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div[2]/div/button[3]')
         like_btn.click()
 
     def dislike(self):
-        dislike_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[1]')
+        # dislike_ = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[1]')
+        # dislike_btn.click()
+                                                           
+        dislike_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div[2]/div/button[1]')
         dislike_btn.click()
+        
+        # self.driver.find_element_by_css_selector('body').send_keys(Keys.LEFT)
+        
 
     def close_popup(self):
         popup_3 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
@@ -68,6 +75,7 @@ class Bot():
         for i in range(num_swipes):
             print(i)
             time.sleep(0.3)
+            self.driver.find_element_by_css_selector('body').send_keys(Keys.UP)
             # save the screenshot
             name = "screenshot_{}.png".format(i+start_index)
             self.save_screenshot(name)
@@ -80,4 +88,4 @@ bot = Bot()
 bot.login()
 
 '//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/div[1]/div/div/div/div/div'
-
+driver.find_element_by_css_selector('body').send_keys(Keys.LEFT)
