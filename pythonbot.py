@@ -2,6 +2,7 @@ from selenium import webdriver
 from secrets import username, password
 
 import time
+import urllib
 # driver_path = '/chromedriver_win32/chromedriver'
 # driver = webdriver.Chrome(executable_path=driver_path)
 
@@ -41,12 +42,10 @@ class Bot():
 
         time.sleep(2)
         # pass popups
-        popup_1 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]/span')
+        popup_1 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')
         popup_1.click()                                
-        popup_2 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]/span')
+        popup_2 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')
         popup_2.click()
-
-        popup_1 = bot.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]/span')
 
     def like(self):
         like_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[3]')
@@ -55,5 +54,23 @@ class Bot():
     def dislike(self):
         dislike_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[1]')
         dislike_btn.click()
+
+    def close_popup(self):
+        popup_3 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
+        popup_3.click()
+
+    def swipe_reject(self):
+        num_swipes=30
+        for i in range(num_swipes):
+            print(i)
+            time.sleep(0.5)
+            try:
+                self.dislike()
+            except:
+
+                self.close_popup()
+
 bot = Bot()
 bot.login()
+
+'//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/div[1]/div/div/div/div/div'
