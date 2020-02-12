@@ -16,9 +16,8 @@ app = dash.Dash(__name__)
 # the lis of all the possible images
 image_names = os.listdir(crops_path)
 global image_index
-image_index = -1
-# image_filename = crops_path+'cropped_screenshot_100.png'
-# encoded_image = base64.b64encode(open(image_filename, 'rb').read())
+image_index = -1    # to keep track of the index images
+
 
 app.layout = html.Div(
     children=[
@@ -44,18 +43,19 @@ app.layout = html.Div(
                         value='Linear',
                         labelStyle={'display': 'inline-block'}
                     ),
-                    
-                    html.Button('next', id='next-btn'),
+
+                    html.Button('next', id='next-btn', style={"textAlignt": "center"}),
                 ],
                 className="three columns",
+                style={
+                    'textAlign': 'center',
+                },
             ),
 
             html.Div(
                 [
-                    # html.Img(src= app.get_asset_url(crops_path+"cropped_screenshot_1.png")), #src=crops_path+"cropped_screenshot_1.png")
                     html.Img(
                         id="img-viewer",
-                        # src='data:image/png;base64,{}'.format(encoded_image.decode())
                         )
                 ],
                 className="nine columns",
@@ -63,21 +63,6 @@ app.layout = html.Div(
         ])
     ],
 )
-
-
-@app.callback(
-    # dash.dependencies.Output("img-index", "children"),
-    [],
-    [
-        dash.dependencies.Input("imgs-list", "value"),
-    ]
-)
-def upload_img_index(value):
-    if value is not None:
-        
-        global image_index
-        image_index = value
-        print("se actualizó el image index")
 
 
 @app.callback(
@@ -107,19 +92,11 @@ def update_viewer(img_index):
 def update_img_list(n_clicks):
     if n_clicks is not None:
         global image_index
-        new_index = (image_index + 1)%len(image_names)
-        image_index  = new_index
+        new_index = (image_index + 1) % len(image_names)
+        image_index = new_index
 
-        # actualizar_image_index(new_index)
-        print("el nuevo index es", new_index)
         return new_index
 
-def actualizar_image_index(new_index):
-    print("*"*10)
-    print("*"*10)
-    print(image_index)
-    print("se actualizará el image index")
-    image_index = new_index
 
 if __name__ == "__main__":
     app.run_server(debug=True)
