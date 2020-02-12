@@ -4,12 +4,6 @@ from selenium.webdriver.common.keys import Keys
 
 import time
 import urllib
-# driver_path = '/chromedriver_win32/chromedriver'
-# driver = webdriver.Chrome(executable_path=driver_path)
-
-# options = webdriver.ChromeOptions()
-# options.binary_location = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
-# driver = webdriver.Chrome(chrome_options=options, executable_path="C:/Utility/BrowserDrivers/chromedriver.exe")
 
 class Bot():
     def __init__(self):
@@ -54,20 +48,17 @@ class Bot():
 
     def dislike(self):
         # dislike_ = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/button[1]')
-        # dislike_btn.click()
-                                                           
+        # dislike_btn.click()                                             
         dislike_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div[2]/div/button[1]')
         dislike_btn.click()
-        
         # self.driver.find_element_by_css_selector('body').send_keys(Keys.LEFT)
         
-
     def close_popup(self):
         popup_3 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
         popup_3.click()
 
     def save_screenshot(self, name):
-        path = "./screenshots/"
+        path = "./images/screenshots/"
         print("saving image:", name)
         self.driver.save_screenshot(path+name)
 
@@ -76,16 +67,21 @@ class Bot():
             print(i)
             time.sleep(0.3)
             self.driver.find_element_by_css_selector('body').send_keys(Keys.UP)
+            time.sleep(0.2)
             # save the screenshot
             name = "screenshot_{}.png".format(i+start_index)
             self.save_screenshot(name)
             try:
                 self.dislike()
             except:
-                self.close_popup()
+                try:
+                    self.close_popup()
+                except:
+                    self.driver.find_element_by_css_selector('body').send_keys(Keys.LEFT)
+                
 
 bot = Bot()
 bot.login()
 
 '//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/div[1]/div/div/div/div/div'
-driver.find_element_by_css_selector('body').send_keys(Keys.LEFT)
+# driver.find_element_by_css_selector('body').send_keys(Keys.LEFT)
