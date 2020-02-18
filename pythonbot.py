@@ -69,7 +69,7 @@ class Bot():
             self.driver.find_element_by_css_selector('body').send_keys(Keys.UP)
             time.sleep(0.2)
             # save the screenshot
-            name = "screenshot_{}.png".format(i+start_index)
+            name = "screenshot {}.png".format(i+start_index)
             self.save_screenshot(name)
             try:
                 self.dislike()
