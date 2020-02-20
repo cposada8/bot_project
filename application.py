@@ -19,6 +19,9 @@ database_name = "database.csv"
 save_every = 5 # parameter to control savings of the database
 
 app = dash.Dash(__name__)
+application = app.server
+app.scripts.config.serve_locally = True
+
 
 # global variables to keep track of them
 global image_index
@@ -174,4 +177,4 @@ def update_img_list(n_clicks):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=False, port=8000)
